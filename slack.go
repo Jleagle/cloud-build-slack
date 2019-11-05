@@ -19,6 +19,10 @@ func HelloPubSub(ctx context.Context, m PubSubMessage) (err error) {
 		return err
 	}
 
+	if build.Status == "QUEUED" {
+		return nil
+	}
+
 	return slack.PostWebhook(os.Getenv("ENDPOINT"), &slack.WebhookMessage{
 		Username: "Cloud Build",
 		IconURL:  "https://avatars0.githubusercontent.com/u/38220399",
